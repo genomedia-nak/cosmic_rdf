@@ -4,7 +4,7 @@ require 'cosmic_rdf/parser/tsv'
 
 module CosmicRdf
   module Parser
-    class Struct < Tsv
+    class Breakpoint < Tsv
       HEADERS = {
         'Sample name' => {
           name: :sample_name,
@@ -42,28 +42,65 @@ module CosmicRdf
 #          name: :histology_subtype_3,
 #          fmt:  :n
 #        },
+
+        'Mutation Type' => {
+          name: :mutation_type,
+          fmt:  :i
+        },
         'Mutation ID' => {
           name: :mutation_id,
           fmt:  :i
         },
-        'Mutation Type' => {
-          name: :mutation_type,
-          fmt:  :i
+        'Breakpoint Order' => {
+          name: :breakpoint,
+          fmt:  :s
         },
         'GRCh' => {
           name: :grch,
           fmt:  :i
         },
-        'description' => {
-          name: :description,
+        'Chrom From' => {
+          name: :chrom_from,
+          fmt:  :i
+        },
+        'Location From min' => {
+          name: :location_from_min,
+          fmt:  :i
+        },
+        'Location From max' => {
+          name: :location_from_max,
+          fmt:  :i
+        },
+        'Strand From' => {
+          name: :strand_from,
           fmt:  :s
         },
-#        'PUBMED_PMID' => {
-#          name: :pmid,
-#          fmt:  :i
-#        },
+        'Chrom To' => {
+          name: :chrom_to,
+          fmt:  :i
+        },
+        'Location To min' => {
+          name: :location_to_min,
+          fmt:  :i
+        },
+        'Location To max' => {
+          name: :location_to_max,
+          fmt:  :i
+        },
+        'Strand To' => {
+          name: :strand_to,
+          fmt:  :s
+        },
+        'Non-templated ins seq' => {
+          name: :non_templated_ins_seq,
+          fmt:  :s
+        },
 #        'ID_STUDY' => {
 #          name: :study_id,
+#          fmt:  :i
+#        },
+#        'PUBMED_PMID' => {
+#          name: :pmid,
 #          fmt:  :i
 #        }
       }.freeze

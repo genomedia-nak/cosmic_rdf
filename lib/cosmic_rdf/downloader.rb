@@ -46,6 +46,8 @@ module CosmicRdf
         files.each do |file|
           src  = File.join('cosmic', grch, 'cosmic', version, file)
           dest = File.join(dest_dir, file)
+          puts "src #{src}"
+          puts "dest #{dest}"
           cli.download!(src, dest)
         end
       end

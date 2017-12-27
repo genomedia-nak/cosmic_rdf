@@ -9,6 +9,7 @@ require 'cosmic_rdf/parser/row'
 
 module CosmicRdf
   module Parser
+
     # Tsv file parser
     class Tsv
       HEADERS = {}.freeze
@@ -19,9 +20,9 @@ module CosmicRdf
         basename = File.basename(gzipped_tsv_file)
         raise ArgumentError, "Invalid filename: #{basename}" unless
           FILES[self.class.name.split('::').last.underscore.to_sym] == basename
-
-        @io = Zlib::GzipReader.open(gzipped_tsv_file)
-        @tsv = CSV.new(@io, col_sep: "\t", headers: :first_row)
+        
+        @io = Zlib::GzipReader.open(gzipped_tsv_file,  invalid: :replace, undef: :replace)
+        @tsv = CSV.new(@io, col_sep: "\t", headers: :first_row, quote_char: "\a") ## unlikely Escape sequence....
       end
 
       def self.open(tsv_file)
@@ -29,6 +30,7 @@ module CosmicRdf
         if block_given?
           begin
             yield obj
+          # rescue CSV::MalformedCSVError
           ensure
             obj.close
           end

@@ -4,12 +4,12 @@ require 'cosmic_rdf/parser/tsv'
 
 module CosmicRdf
   module Parser
-    class Resistance
+    class Resistance < Tsv
       HEADERS = {
-        'Sample Name' => {
-          name: :sample_name,
-          fmt:  :s
-        },
+#        'Sample Name' => {
+#          name: :sample_name,
+#          fmt:  :s
+#        },
         'Sample ID' => {
           name: :sample_id,
           fmt:  :i
@@ -42,38 +42,38 @@ module CosmicRdf
           name: :cds,
           fmt:  :s
         },
-        'Primary Tissue' => {
-          name: :primary_site,
-          fmt:  :n
-        },
-        'Tissue Subtype 1' => {
-          name: :site_subtype_1,
-          fmt:  :n
-        },
-        'Tissue Subtype 2' => {
-          name: :site_subtype_2,
-          fmt:  :n
-        },
-        'Tissue Subtype 3' => {
-          name: :site_subtype_3,
-          fmt:  :n
-        },
-        'Histology' => {
-          name: :primary_histology,
-          fmt:  :n
-        },
-        'Histology Subtype 1' => {
-          name: :histology_subtype_1,
-          fmt:  :n
-        },
-        'Histology Subtype 2' => {
-          name: :histology_subtype_2,
-          fmt:  :n
-        },
-        'Pubmed Id' => {
-          name: :pmid,
-          fmt:  :i
-        },
+#        'Primary Tissue' => {
+#          name: :primary_site,
+#          fmt:  :n
+#        },
+#        'Tissue Subtype 1' => {
+#          name: :site_subtype_1,
+#          fmt:  :n
+#        },
+#        'Tissue Subtype 2' => {
+#          name: :site_subtype_2,
+#          fmt:  :n
+#        },
+#        'Tissue Subtype 3' => {
+#          name: :site_subtype_3,
+#          fmt:  :n
+#        },
+#        'Histology' => {
+#          name: :primary_histology,
+#          fmt:  :n
+#        },
+#        'Histology Subtype 1' => {
+#          name: :histology_subtype_1,
+#          fmt:  :n
+#        },
+#        'Histology Subtype 2' => {
+#          name: :histology_subtype_2,
+#          fmt:  :n
+#        },
+#        'Pubmed Id' => {
+#          name: :pmid,
+#          fmt:  :i
+#        },
         'CGP Study' => {
           name: :cgp_study,
           fmt:  :s

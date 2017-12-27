@@ -14,14 +14,14 @@ module CosmicRdf
           name: :sample_name,
           fmt:  :s
         },
-        'id_tumour' => {
-          name: :tumor_id,
-          fmt:  :i
-        },
-        'id_ind' => {
-          name: :ind_id,
-          fmt:  :i
-        },
+#        'id_tumour' => {
+#          name: :tumor_id,
+#          fmt:  :i
+#        },
+#        'id_ind' => {
+#          name: :ind_id,
+#          fmt:  :i
+#        },
         'Primary site' => {
           name: :primary_site,
           fmt:  :n
@@ -70,10 +70,10 @@ module CosmicRdf
           name: :msi,
           fmt:  :s
         },
-        'average_ploidy' => {
-          name: :average_ploidy,
-          fmt:  :f
-        },
+ #       'average_ploidy' => {
+ #         name: :average_ploidy,
+ #         fmt:  :f
+ #       },
         'whole_genome_screen' => {
           name: :whole_genome_screen,
           fmt:  :b

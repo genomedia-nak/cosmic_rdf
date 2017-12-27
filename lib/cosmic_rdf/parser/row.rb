@@ -25,6 +25,10 @@ module CosmicRdf
         @attrs[key.to_sym]
       end
 
+      def attributes
+        @attrs
+      end
+      
       protected
 
       def parse(row, headers)

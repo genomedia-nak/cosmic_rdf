@@ -22,48 +22,52 @@ module CosmicRdf
           name: :sample_id,
           fmt:  :i
         },
-        'ID_TUMOUR' => {
-          name: :tumor_id,
-          fmt:  :i
-        },
-        'Primary site' => {
-          name: :primary_site,
-          fmt:  :n
-        },
-        'Site subtype 1' => {
-          name: :site_subtype_1,
-          fmt:  :n
-        },
-        'Site subtype 2' => {
-          name: :site_subtype_2,
-          fmt:  :n
-        },
-        'Site subtype 3' => {
-          name: :site_subtype_3,
-          fmt:  :n
-        },
-        'Primary histology' => {
-          name: :primary_histology,
-          fmt:  :n
-        },
-        'Histology subtype 1' => {
-          name: :histology_subtype_1,
-          fmt:  :n
-        },
-        'Histology subtype 2' => {
-          name: :histology_subtype_2,
-          fmt:  :n
-        },
-        'Histology subtype 3' => {
-          name: :histology_subtype_3,
-          fmt:  :n
-        },
-        'SAMPLE_NAME' => {
-          name: :sample_name,
-          fmt:  :s
-        },
+#        'ID_TUMOUR' => {
+#          name: :tumor_id,
+#          fmt:  :i
+#        },
+#        'Primary site' => {
+#          name: :primary_site,
+#          fmt:  :n
+#        },
+#        'Site subtype 1' => {
+#          name: :site_subtype_1,
+#          fmt:  :n
+#        },
+#        'Site subtype 2' => {
+#          name: :site_subtype_2,
+#          fmt:  :n
+#        },
+#        'Site subtype 3' => {
+#          name: :site_subtype_3,
+#          fmt:  :n
+#        },
+#        'Primary histology' => {
+#          name: :primary_histology,
+#          fmt:  :n
+#        },
+#        'Histology subtype 1' => {
+#          name: :histology_subtype_1,
+#          fmt:  :n
+#        },
+#        'Histology subtype 2' => {
+#          name: :histology_subtype_2,
+#          fmt:  :n
+#        },
+#        'Histology subtype 3' => {
+#          name: :histology_subtype_3,
+#          fmt:  :n
+#        },
+#        'SAMPLE_NAME' => {
+#          name: :sample_name,
+#          fmt:  :s
+#        },
         'TOTAL_CN' => {
           name: :total_cn,
+          fmt:  :i
+        },
+        'Minor Allele' => {
+          name: :minor_allele,
           fmt:  :i
         },
         'MUT_TYPE' => {

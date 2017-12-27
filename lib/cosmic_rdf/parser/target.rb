@@ -10,7 +10,7 @@ module CosmicRdf
     #       pp row
     #     end
     #   end
-    class Mutation < Tsv
+    class Target < Tsv
       HEADERS = {
         'Gene name' => {
           name: :gene_name,
