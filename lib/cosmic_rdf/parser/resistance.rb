@@ -35,11 +35,11 @@ module CosmicRdf
           fmt:  :s
         },
         'AA Mutation' => {
-          name: :aa,
+          name: :mutation_aa,
           fmt:  :s
         },
         'CDS Mutation' => {
-          name: :cds,
+          name: :mutation_cds,
           fmt:  :s
         },
 #        'Primary Tissue' => {

@@ -6,13 +6,20 @@
 $: << File.expand_path('../lib' , __dir__)
 require 'fileutils'
 require 'pathname'
-require "cosmic_rdf"
+require 'cosmic_rdf'
 require 'optparse'
 
 
 
 def localmain()
   FileUtils.mkdir_p(@out_dir) unless FileTest.exist?(@out_dir)
+  # if FileTest.exist?(@out_dir)
+  #   bkdate = Date.today.strftime("%Y%m%d-%H%M%S")
+  #   bk_out_dir = @out_dir + bkdate
+  #   FileUtils.mv(@out_dir, bk_out_dir)
+  #   FileUtils.mkdir_p(@out_dir)
+  # end
+  
   CosmicRdf::FILES.each do |symbl, file|
     rdf_create(symbl)
   end
@@ -22,12 +29,29 @@ def rdf_create(symbl)
   puts "#{symbl} in progress"
   classify = symbl.capitalize
   cosmic_file = @dest_dir.join(CosmicRdf::FILES[symbl])
-  rdf_file  =  @out_dir.join(CosmicRdf::RDFS[symbl])
+  rdf_file  =  @out_dir.join(File.basename(cosmic_file, ".tsv.gz") + '.ttl')
+
+  ## read, write file check.
+  unless File.exist?(cosmic_file)
+    puts "  #{cosmic_file} is not found! Did you download it?"
+    return
+  end
+
+  if File.exist?(rdf_file)
+    puts "  #{rdf_file} already exists. skip this file."
+    return
+  end
+
   parser = CosmicRdf::Parser.const_get(classify)
   converter = CosmicRdf::Converter.const_get(classify)
   parser.open(cosmic_file) do |tsv|
     converter.rdf_write(rdf_file, tsv)
   end
+end
+
+
+def rdf_file_name(filename)
+  res = filename.split('.')[0] + '.ttl'
 end
 
 

@@ -93,7 +93,7 @@ module CosmicRdf
                   "    #{@predicate}ensembl <#{CosmicRdf::URIs[:ensembl]}#{acc}>\n" +
                   "  ];"
         end
-        return    "  #{@predicate}accession_number \"#{acc}\"" unless acc == nil
+        return    "  #{@predicate}accession_number \"#{acc}\";" unless acc == nil
         return nil
       end
 
@@ -129,10 +129,10 @@ module CosmicRdf
         #          "  ];"
         #end
         return nil if mut_id == nil || mut_id == ""
-        return    "  :mutation #{mut_id} ;" if mut_id.is_a? Integer
+        return    "  mutation: #{mut_id} ;" if mut_id.is_a? Integer
          mut_id.delete!("COSM") 
         if mut_id =~ /^[0-9]+$/
-          return    "  :mutation #{mut_id} ;"
+          return    "  mutation: #{mut_id} ;"
         end
 
       end
