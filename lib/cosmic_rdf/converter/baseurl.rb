@@ -9,7 +9,6 @@ module CosmicRdf
       
       # read gzip-file-obj
       def self.rdf_write(rdf_file, tsv)
-
         @current = self.name.split('::').last.underscore.to_sym
         @predicate = CosmicRdf::PREDICATE_PREFIX[@current.to_sym].split(" ")[1].split(":")[0] + ":"
         
@@ -36,10 +35,10 @@ module CosmicRdf
                   @add_info.include?(name.to_sym) || 
                   val.to_s.empty? 
 
-          unless val.is_a? Integer
-            rdf_ttl <<  "  #{@predicate}#{name} \"#{val}\" ;"
-          else
+          if val.is_a? Integer
             rdf_ttl <<  "  #{@predicate}#{name} #{val} ;"
+          else
+            rdf_ttl <<  "  #{@predicate}#{name} \"#{val}\" ;"
           end
         end
         
@@ -129,10 +128,10 @@ module CosmicRdf
         #          "  ];"
         #end
         return nil if mut_id == nil || mut_id == ""
-        return    "  mutation: #{mut_id} ;" if mut_id.is_a? Integer
-         mut_id.delete!("COSM") 
+        return   "  #{@predicate}mutation #{mut_id} ;" if mut_id.is_a? Integer
+        mut_id.delete!("COSM") 
         if mut_id =~ /^[0-9]+$/
-          return    "  mutation: #{mut_id} ;"
+          return "  #{@predicate}mutation #{mut_id} ;"
         end
 
       end
@@ -163,9 +162,11 @@ module CosmicRdf
                   "    #{@predicate}study_id \"#{study_id}\";\n" +
                   "    rdfs:seeAlso <#{CosmicRdf::URIs[:study]}#{study_id}>\n" +
                   "  ];"
+        elsif study_id != nil
+          return "  #{@predicate}study_id \"#{study_id}\" ;"
+        else
+          return nil
         end
-        return "  #{@predicate}study_id \"#{study_id}\" ;" unless study_id == nil
-        return nil
       end
 
       def self.tcga_sample_relation(sample_name)
@@ -174,15 +175,29 @@ module CosmicRdf
                   "    #{@predicate}sample_name \"#{sample_name}\";\n" +
                   "    #{@predicate}cancerDigital <#{CosmicRdf::URIs[:cancerDigital]}#{sample_name}>\n" +
                   "  ];"
+        elsif sample_name != nil
+          return "  #{@predicate}sample_name \"#{sample_name}\" ;"
+        else 
+          return nil
         end
-        return "  #{@predicate}sample_name \"#{sample_name}\" ;" unless sample_name == nil
-        return nil
       end
 
       def self.cosmicgene_relation(cosm_gene)
         return "  #{@predicate}cosmicgene: #{cosm_gene} ;" if cosm_gene =~ /^[0-9]+$/
         return nil
       end
+
+      def self.entrez_id_relation(entrez_id)
+        if entrez_id != nil && entrez_id =~ /^[0-9]+$/
+          return  "  #{@predicate}GeneId [\n" +
+                  "    a #{@predicate}Entrez_GeneId;\n" +
+                  "    #{@predicate}GeneId \"#{entrez_id}\";\n" +
+                  "    rdfs:seeAlso <#{CosmicRdf::URIs[:ncbigene]}#{entrez_id}>\n" +
+                  "  ];"
+        end
+        return nil
+      end
+      
 
       def self.define_header
         header = <<'EOS'

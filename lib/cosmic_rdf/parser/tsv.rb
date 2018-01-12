@@ -10,19 +10,28 @@ require 'cosmic_rdf/parser/row'
 module CosmicRdf
   module Parser
 
-    # Tsv file parser
     class Tsv
       HEADERS = {}.freeze
 
-      def initialize(gzipped_tsv_file)
-        raise ArgumentError, "File not found: #{gzipped_tsv_file}" unless
-          File.exist? gzipped_tsv_file
-        basename = File.basename(gzipped_tsv_file)
+      def initialize(cosmic_file)
+        raise ArgumentError, "File not found: #{cosmic_file}" unless
+          File.exist? cosmic_file
+        basename = File.basename(cosmic_file)
         raise ArgumentError, "Invalid filename: #{basename}" unless
           FILES[self.class.name.split('::').last.underscore.to_sym] == basename
         
-        @io = Zlib::GzipReader.open(gzipped_tsv_file,  invalid: :replace, undef: :replace)
-        @tsv = CSV.new(@io, col_sep: "\t", headers: :first_row, quote_char: "\a") ## unlikely Escape sequence....
+        # .csv or .gz
+        if File.extname(cosmic_file) == '.gz'
+          @io = Zlib::GzipReader.open(cosmic_file,  invalid: :replace, undef: :replace)
+          @tsv = CSV.new(@io, col_sep: "\t", headers: :first_row, quote_char: "\a") ## unlikely Escape sequence....
+        elsif File.extname(cosmic_file) == '.csv'
+          @io = File.open(cosmic_file,  invalid: :replace, undef: :replace)
+          @tsv = CSV.new(@io, col_sep: ',', headers: :first_row, quote_char: '"')
+        else
+          raise ArgumentError, "Invalid filetype: #{basename}"
+        end
+        
+        
       end
 
       def self.open(tsv_file)

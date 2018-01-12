@@ -12,6 +12,7 @@ require 'optparse'
 
 
 def localmain()
+  #create output directory.
   FileUtils.mkdir_p(@out_dir) unless FileTest.exist?(@out_dir)
   # if FileTest.exist?(@out_dir)
   #   bkdate = Date.today.strftime("%Y%m%d-%H%M%S")
@@ -19,7 +20,6 @@ def localmain()
   #   FileUtils.mv(@out_dir, bk_out_dir)
   #   FileUtils.mkdir_p(@out_dir)
   # end
-  
   CosmicRdf::FILES.each do |symbl, file|
     rdf_create(symbl)
   end
@@ -29,11 +29,11 @@ def rdf_create(symbl)
   puts "#{symbl} in progress"
   classify = symbl.capitalize
   cosmic_file = @dest_dir.join(CosmicRdf::FILES[symbl])
-  rdf_file  =  @out_dir.join(File.basename(cosmic_file, ".tsv.gz") + '.ttl')
+  rdf_file   =  @out_dir.join(CosmicRdf::RDFS[symbl])
 
   ## read, write file check.
   unless File.exist?(cosmic_file)
-    puts "  #{cosmic_file} is not found! Did you download it?"
+    puts "  #{cosmic_file} is not found! Please download it."
     return
   end
 
@@ -48,12 +48,6 @@ def rdf_create(symbl)
     converter.rdf_write(rdf_file, tsv)
   end
 end
-
-
-def rdf_file_name(filename)
-  res = filename.split('.')[0] + '.ttl'
-end
-
 
 def _test_rdf_create_sample
   cnt = 0

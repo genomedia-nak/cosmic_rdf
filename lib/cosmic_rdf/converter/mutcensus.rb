@@ -4,9 +4,9 @@ require 'cosmic_rdf/converter/baseurl'
 
 module CosmicRdf
   module Converter
-    class Mutation < Baseurl
+    class Census < Baseurl
       @ignore    = []
-      @add_info  = [:gene_name, :accession_number, :hgnc_id, :sample_id, :mutation_id, :pmid, :study_id]
+      @add_info  = [:gene_name, :accession_number, :hgnc_id, :sample_id]
 
       def self.identifier(linecnt)
         linecnt
@@ -28,23 +28,10 @@ module CosmicRdf
         sampleid_relation(@row.sample_id)
       end
       
-      def self.mutation_id
-        mutationid_relation(@row.mutation_id)
-      end
-      
-      def self.pmid
-        pmid_relation(@row.pmid)
-      end
-
-      def self.study_id
-        studyid_relation(@row.study_id)
-      end
-
       def self.use_prefix
         prefix =[
           CosmicRdf::PREFIX[:cosmicgene],
           CosmicRdf::PREFIX[:sample],
-          CosmicRdf::PREFIX[:mutation],
           CosmicRdf::PREFIX[:study],
         ]
       end
@@ -53,10 +40,10 @@ module CosmicRdf
         header = <<'          END'
           mutation:
               a dcat:Dataset ;
-              dct:title COSMIC MUTATION ;
-              rdfs:label cosmic mutation ;
-              dcat:keyword "cancer","tumor" ,"mutation" ;
-              dcat:distribution "CosmicMutantExport.tsv.gz" ;
+              dct:title COSMIC MUTATION CENSUS ;
+              rdfs:label cosmic mutation census ;
+              dcat:keyword "mutation" ;
+              dcat:distribution :CosmicMutantExportCensus.tsv.gz;
               dcterms:language lang:en ;
               .
           END

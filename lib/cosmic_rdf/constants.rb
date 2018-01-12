@@ -10,7 +10,7 @@ module CosmicRdf
   FILES = {
     sample:         'CosmicSample.tsv.gz',
     mutation:       'CosmicMutantExport.tsv.gz',
-    census:         'CosmicMutantExportCensus.tsv.gz',
+    # census:         'CosmicMutantExportCensus.tsv.gz',
     # screen:         'CosmicGenomeScreensMutantExport.tsv.gz',
     target:         'CosmicCompleteTargetedScreensMutantExport.tsv.gz',
     expression:     'CosmicCompleteGeneExpression.tsv.gz',
@@ -23,6 +23,7 @@ module CosmicRdf
     fusion:         'CosmicFusionExport.tsv.gz',
     hgnc:           'CosmicHGNC.tsv.gz',
     transcript:     'CosmicTranscripts.tsv.gz',
+    census:         'cancer_gene_census.csv',
     ##ploidy:         'ascat_acf_ploidy.tsv',
     ##fasta:          'All_COSMIC_Genes.fasta.gz',
     ##classification: 'classification.csv',
@@ -30,24 +31,25 @@ module CosmicRdf
     ##vcf_noncoding:  'VCF/CosmicNonCodingVariants.vcf.gz'
   }.freeze
 
-#  RDF-file name is FILES base name...
-#  RDFS = {
-#    sample:         'CosmicSample.ttl',
-#    mutation:       'CosmicMutantExport.ttl',
-#    census:         'CosmicMutantExportCensus.ttl',
-#    screen:         'CosmicGenomeScreensMutantExport.ttl',
-#    target:         'CosmicCompleteTargetedScreensMutantExport.ttl',
-#    expression:     'CosmicCompleteGeneExpression.ttl',
-#    cna:            'CosmicCompleteCNA.ttl',
-#    methylation:    'CosmicCompleteDifferentialMethylation.ttl',
-#    ncv:            'CosmicNCV.ttl',
-#    resistance:     'CosmicResistanceMutations.ttl',
-#    struct:         'CosmicStructExport.ttl',
-#    breakpoint:     'CosmicBreakpointsExport.ttl',
-#    fusion:         'CosmicFusionExport.ttl',
-#    hgnc:           'CosmicHGNC.ttl',
-#    transcript:     'CosmicTranscripts.ttl',
-#  }.freeze
+#  RDF-file name is FILES[] base name...
+  RDFS = {
+    sample:         'CosmicSample.ttl',
+    mutation:       'CosmicMutantExport.ttl',
+    #census:         'CosmicMutantExportCensus.ttl',
+    #screen:         'CosmicGenomeScreensMutantExport.ttl',
+    target:         'CosmicCompleteTargetedScreensMutantExport.ttl',
+    expression:     'CosmicCompleteGeneExpression.ttl',
+    cna:            'CosmicCompleteCNA.ttl',
+    methylation:    'CosmicCompleteDifferentialMethylation.ttl',
+    ncv:            'CosmicNCV.ttl',
+    resistance:     'CosmicResistanceMutations.ttl',
+    struct:         'CosmicStructExport.ttl',
+    breakpoint:     'CosmicBreakpointsExport.ttl',
+    fusion:         'CosmicFusionExport.ttl',
+    hgnc:           'CosmicHGNC.ttl',
+    transcript:     'CosmicTranscripts.ttl',
+    census:         'cancer_gene_census.ttl',
+  }.freeze
 
   URIs = {
     sample:        'http://cancer.sanger.ac.uk/cosmic/sample/overview?id=',
@@ -68,13 +70,14 @@ module CosmicRdf
     mutationid:    'http://cancer.sanger.ac.uk/cosmic/mutation/overview?id=',
     genedirect:    'http://cancer.sanger.ac.uk/cosmic/gene/analysis?ln=',
     study:         'http://cancer.sanger.ac.uk/cosmic/study/overview?study_id=',
+    cosmiccensus:  'http://cancer.sanger.ac.uk/cosmic/census-page/',
     cancerDigital: 'http://cancer.digitalslidearchive.net/index_mskcc.php?slide_name=',
     cosmicgene:    'http://identifiers.org/cosmic/',
     refseq:        'http://identifiers.org/refseq/',
     hgncurl:       'http://identifiers.org/hgnc/',
     pubmed:        'http://identifiers.org/pubmed/',
     ensembl:       'http://identifiers.org/ensembl/',
-    ncbigene:      'http://identifiers.org/ncbigene/'
+    ncbigene:      'http://identifiers.org/ncbigene/',
   }.freeze
 
   PREFIX = {
@@ -96,7 +99,8 @@ module CosmicRdf
     struct:      "@prefix struct:<#{URIs[:struct]}> .",
     transcript:  "@prefix transcript:<#{URIs[:transcript]}> .",
     cosmicgene:  "@prefix cosmicgene:<#{URIs[:cosmicgene]}> .",
-    ncbigene:    "@prefix  ncbigene:<#{URIs[:ncbigene]}> .",
+    cosmiccensus:"@prefix cosmiccensus:<#{URIs[:cosmiccensus]}> .",
+    ncbigene:    "@prefix ncbigene:<#{URIs[:ncbigene]}> .",
 
   }.freeze
 

@@ -13,10 +13,11 @@ module CosmicRdf
       end
 
       def self.entrez_id
-        return "  #{@predicate}ncbigene #{@row.entrez_id} ;" unless @row.entrez_id == nil
+        entrez_id_relation(@row.entrez_id)
       end
 
       def self.gene_name
+        # relation at identifier
         return nil
       end
       
