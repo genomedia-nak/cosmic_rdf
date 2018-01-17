@@ -34,7 +34,7 @@ header = <<'EOS'
       rdfs:label "breakpoint data" ;
       dcat:keyword "breakpoint" ;
       dcat:distribution "CosmicBreakpointsExport.tsv.gz" ;
-      dcterms:language lang:en ;
+      dcat:language lang:en ;
       .
 EOS
       end

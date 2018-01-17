@@ -40,6 +40,7 @@ module CosmicRdf
         studyid_relation(@row.study_id)
       end
 
+
       def self.use_prefix
         prefix =[
           CosmicRdf::PREFIX[:cosmicgene],
@@ -50,16 +51,16 @@ module CosmicRdf
       end
 
       def self.rdf_catalog
-        header = <<'          END'
-          mutation:
-              a dcat:Dataset ;
-              dct:title COSMIC MUTATION ;
-              rdfs:label cosmic mutation ;
-              dcat:keyword "cancer","tumor" ,"mutation" ;
-              dcat:distribution "CosmicMutantExport.tsv.gz" ;
-              dcterms:language lang:en ;
-              .
-          END
+        header = <<'EOS'
+mt:
+    a dcat:Dataset ;
+    dcat:title "COSMIC MUTATION" ;
+    rdfs:label "cosmic mutation" ;
+    dcat:keyword "cancer","tumor" ,"mutation" ;
+    dcat:distribution "CosmicMutantExport.tsv.gz" ;
+    dcat:language lang:en ;
+    .
+EOS
       end
       
     end #- end Class

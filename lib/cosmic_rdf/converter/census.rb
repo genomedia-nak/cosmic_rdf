@@ -186,7 +186,7 @@ module CosmicRdf
               rdfs:label cosmic census ;
               dcat:keyword "cancer","census", "tier" ;
               dcat:distribution "cancer_gene_census.csv" ;
-              dcterms:language lang:en ;
+              dcat:language lang:en ;
               .
           END
       end

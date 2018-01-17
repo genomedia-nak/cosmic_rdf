@@ -5,8 +5,8 @@ require 'cosmic_rdf/converter/baseurl'
 module CosmicRdf
   module Converter
     class Hgnc < Baseurl
-      @ignore = [:gene_name]
-      @add_info = [:entrez_id, :hgnc_id]
+      @ignore = []
+      @add_info = [:entrez_id, :hgnc_id, :gene_name]
 
       def self.identifier(linecnt)
         @row.gene_name

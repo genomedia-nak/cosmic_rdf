@@ -18,6 +18,8 @@ module CosmicRdf
           f.puts use_prefix()
           f.puts CosmicRdf::PREDICATE_PREFIX[@current.to_sym]
           f.puts ""
+          f.puts rdf_catalog()
+          f.puts ""
           tsv.each do |obj|
             linecnt += 1
             f.puts rdf_turtle(linecnt, obj)
@@ -34,8 +36,8 @@ module CosmicRdf
           next if @ignore.include?(name.to_sym) ||
                   @add_info.include?(name.to_sym) || 
                   val.to_s.empty? 
-
-          if val.is_a? Integer
+          
+          if val.is_a?(Integer) || val.is_a?(FalseClass) ||  val.is_a?(TrueClass)
             rdf_ttl <<  "  #{@predicate}#{name} #{val} ;"
           else
             rdf_ttl <<  "  #{@predicate}#{name} \"#{val}\" ;"
@@ -148,9 +150,9 @@ module CosmicRdf
       def self.pmid_relation(pmid)
         if pmid.to_s =~ /^[0-9]+$/
           return  "  #{@predicate}pubmed [\n" +
-                  "    a #{@predicate}Pubmed;\n" +
-                  "    #{@predicate}pmid \"#{pmid}\";\n" +
-                  "    #{@predicate}pubmed <#{CosmicRdf::URIs[:pubmed]}#{pmid}>\n" +
+                  "    a idot:Pubmed;\n" +
+                  "    dcat:identifier \"#{pmid}\";\n" +
+                  "    rdfs:seeAlso <#{CosmicRdf::URIs[:pubmed]}#{pmid}>\n" +
                   "  ];"
         end
         return nil
@@ -159,6 +161,7 @@ module CosmicRdf
       def self.studyid_relation(study_id)
         if study_id.to_s =~ /^[0-9]+$/
           return  "  #{@predicate}study [\n" +
+                  "    dcat:title \"COSMIC Study ID\"" +
                   "    #{@predicate}study_id \"#{study_id}\";\n" +
                   "    rdfs:seeAlso <#{CosmicRdf::URIs[:study]}#{study_id}>\n" +
                   "  ];"
@@ -173,7 +176,7 @@ module CosmicRdf
         if sample_name.start_with?("TCGA")
           return  "  #{@predicate}sample [\n" +
                   "    #{@predicate}sample_name \"#{sample_name}\";\n" +
-                  "    #{@predicate}cancerDigital <#{CosmicRdf::URIs[:cancerDigital]}#{sample_name}>\n" +
+                  "    rdfs:seeAlso <#{CosmicRdf::URIs[:cancerDigital]}#{sample_name}>\n" +
                   "  ];"
         elsif sample_name != nil
           return "  #{@predicate}sample_name \"#{sample_name}\" ;"
@@ -190,20 +193,23 @@ module CosmicRdf
       def self.entrez_id_relation(entrez_id)
         if entrez_id != nil && entrez_id =~ /^[0-9]+$/
           return  "  #{@predicate}GeneId [\n" +
-                  "    a #{@predicate}Entrez_GeneId;\n" +
+                  "    a <http://live.dbpedia.org/ontology/entrezgene>;\n" +
                   "    #{@predicate}GeneId \"#{entrez_id}\";\n" +
                   "    rdfs:seeAlso <#{CosmicRdf::URIs[:ncbigene]}#{entrez_id}>\n" +
                   "  ];"
         end
         return nil
       end
-      
 
       def self.define_header
         header = <<'EOS'
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix up: <http://identifiers.org/uniprot/> .
-@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix lang: <http://id.loc.gov/vocabulary/iso639-1/> .
+@prefix dbp: <http://dbpedia.org/page/classes#> . 
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix idot: <http://identifiers.org/terms#> .
+@prefix pubmed: <http://identifiers.org/pubmed/> .
 EOS
       end
 

@@ -39,7 +39,7 @@ cna:
     rdfs:label "cosmic copy number abberations" ;
     dcat:keyword "cna", "copy number" ;
     dcat:distribution "CosmicCompleteCNA.tsv.gz" ;
-    dcterms:language lang:en ;
+    dcat:language lang:en ;
     .
 EOS
       end
