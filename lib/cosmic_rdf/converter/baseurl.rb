@@ -65,14 +65,14 @@ module CosmicRdf
           return "  #{@predicate}gene_name[\n" +
                  "     a #{@predicate}Gene;\n" +
                  "     #{@predicate}gene_name \"#{cosm_gene}\";\n" +
-                 "     #{@predicate}cosmicurl <#{CosmicRdf::URIs[:cosmicgene]}#{cosm_gene}>\n"+
+                 "     rdfs:seeAlso <#{CosmicRdf::URIs[:cosmicgene]}#{cosm_gene}>\n"+
                  "  ];"
         end
         unless cosm_gene == nil
           return "  #{@predicate}gene_name [\n" +
                  "     a #{@predicate}Gene;\n" +
                  "     #{@predicate}gene_name \"#{cosm_gene}\";\n" +
-                 "     #{@predicate}cosmicurl <#{CosmicRdf::URIs[:genedirect]}#{cosm_gene}>\n"+
+                 "     rdfs:seeAlso <#{CosmicRdf::URIs[:genedirect]}#{cosm_gene}>\n"+
                  "  ];"
         end
         return nil
@@ -84,14 +84,14 @@ module CosmicRdf
           return  "  #{@predicate}accession[\n" +
                   "    a #{@predicate}Gene;\n" +
                   "    #{@predicate}accession_number \"#{acc}\";\n" +
-                  "    #{@predicate}ncbi <#{CosmicRdf::URIs[:refseq]}#{acc}>\n" +
+                  "    rdfs:seeAlso <#{CosmicRdf::URIs[:refseq]}#{acc}>\n" +
                   "  ];"
         end
         if acc =~ /^((ENS[A-Z]*[FPTG]\d{11}(\.\d+)?)|(FB\w{2}\d{7})|(Y[A-Z]{2}\d{3}[a-zA-Z](\-[A-Z])?)|([A-Z_a-z0-9]+(\.)?(t)?(\d+)?([a-z])?))$/
           return  "  #{@predicate}accession [\n" +
                   "    a #{@predicate}Gene;\n" +
                   "    #{@predicate}accession_number \"#{acc}\";\n" +
-                  "    #{@predicate}ensembl <#{CosmicRdf::URIs[:ensembl]}#{acc}>\n" +
+                  "    rdfs:seeAlso <#{CosmicRdf::URIs[:ensembl]}#{acc}>\n" +
                   "  ];"
         end
         return    "  #{@predicate}accession_number \"#{acc}\";" unless acc == nil
@@ -103,7 +103,7 @@ module CosmicRdf
           return  "  #{@predicate}hgnc [\n" +
                   "    a #{@predicate}Gene;\n" +
                   "    #{@predicate}hgnc_id \"#{hgnc_id}\";\n" +
-                  "    #{@predicate}hgnc <#{CosmicRdf::URIs[:hgncurl]}#{hgnc_id}>\n" +
+                  "    rdfs:seeAlso <#{CosmicRdf::URIs[:hgncurl]}#{hgnc_id}>\n" +
                   "  ];"
         end
         return    "  #{@predicate}hgnc: #{hgnc_id} ;" unless hgnc_id == nil
