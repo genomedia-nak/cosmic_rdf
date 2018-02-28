@@ -48,11 +48,11 @@ module CosmicRdf
           name: :germline,
           fmt:  :s
         },
-        'Tumour types (somatic)' => {
+        'Tumour Types(Somatic)' => {
           name: :somatic_tumour_types,
           fmt:  :s
         },
-        'Tumour types (germline)' => {
+        'Tumour Types(Germline)' => {
           name: :germline_tumour_types,
           fmt:  :s
         },
@@ -76,7 +76,7 @@ module CosmicRdf
           name: :mutation_type,
           fmt:  :s
         },
-        'Translocation partner' => {
+        'Translocation Partner' => {
           name: :translocation_partner,
           fmt:  :s
         },

@@ -106,14 +106,14 @@ module CosmicRdf
           name: :whole_exome,
           fmt:  :b
         },
-#        'ID_STUDY' => {
-#          name: :study_id,
-#          fmt:  :i
-#        },
-#        'PUBMED_PMID' => {
-#          name: :pmid,
-#          fmt:  :i
-#        }
+        'ID_STUDY' => {
+          name: :study_id,
+          fmt:  :i
+        },
+        'PUBMED_PMID' => {
+          name: :pmid,
+          fmt:  :i
+        }
       }.freeze
     end
   end

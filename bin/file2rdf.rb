@@ -20,6 +20,12 @@ def localmain()
   #   FileUtils.mv(@out_dir, bk_out_dir)
   #   FileUtils.mkdir_p(@out_dir)
   # end
+
+  ## test.
+  ## res = _test_rdf_create_mutation
+  ## res = _test_rdf_create_sample
+  ## exit
+  
   CosmicRdf::FILES.each do |symbl, file|
     rdf_create(symbl)
   end
@@ -39,7 +45,7 @@ def rdf_create(symbl)
 
   if File.exist?(rdf_file)
     puts "  #{rdf_file} already exists. skip this file."
-    return
+#   return
   end
 
   parser = CosmicRdf::Parser.const_get(classify)
@@ -58,6 +64,14 @@ def _test_rdf_create_sample
   end
 end
 
+def _test_rdf_create_mutation
+  cnt = 0
+  gz_file = @dest_dir.join(CosmicRdf::FILES[:mutation])
+  rdf_file  =  @out_dir.join(CosmicRdf::RDFS[:mutation])
+  CosmicRdf::Parser::Mutation.open(gz_file) do |tsv|
+    _s = CosmicRdf::Converter::Mutation.rdf_write(rdf_file, tsv)
+  end
+end
 
 
 puts "start script..."

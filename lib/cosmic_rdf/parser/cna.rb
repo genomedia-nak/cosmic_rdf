@@ -66,7 +66,7 @@ module CosmicRdf
           name: :total_cn,
           fmt:  :i
         },
-        'Minor Allele' => {
+        'MINOR_ALLELE' => {
           name: :minor_allele,
           fmt:  :i
         },

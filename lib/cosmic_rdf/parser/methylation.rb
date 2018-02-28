@@ -6,18 +6,18 @@ module CosmicRdf
   module Parser
     class Methylation < Tsv
       HEADERS = {
-#        'STUDY_ID' => {
-#          name: :study_id,
-#          fmt:  :i
-#        },
+        'STUDY_ID' => {
+          name: :study_id,
+          fmt:  :i
+        },
         'ID_SAMPLE' => {
           name: :sample_id,
           fmt:  :i
         },
-        'SAMPLE_NAME' => {
-          name: :sample_name,
-          fmt:  :s
-        },
+#        'SAMPLE_NAME' => {
+#          name: :sample_name,
+#          fmt:  :s
+#        },
 #        'ID_TUMOUR' => {
 #          name: :tumor_id,
 #          fmt:  :i
@@ -54,10 +54,10 @@ module CosmicRdf
 #          name: :histology_subtype_3,
 #          fmt:  :n
 #        },
-#        'FRAGMENT_ID' => {
-#          name: :fragment_id,
-#          fmt:  :s
-#        },
+        'FRAGMENT_ID' => {
+          name: :fragment_id,
+          fmt:  :s
+        },
         'GENOME_VERSION' => {
           name: :grch,
           fmt:  :i

@@ -5,11 +5,17 @@ require 'cosmic_rdf/converter/baseurl'
 module CosmicRdf
   module Converter
     class Target < Baseurl
+
+      @title = "COSMIC Complete Mutation Data (Targeted Screens)"
+      @label = "cthe complete curated COSMIC dataset (targeted screens)"
+      @keyword = "targeted screens"
+      @distribution = "CosmicCompleteTargetedScreensMutantExport.tsv.gz"
+
       @ignore    = []
       @add_info  = [:gene_name, :accession_number, :hgnc_id, :sample_id, :mutation_id, :pmid, :study_id]
 
-      def self.identifier(linecnt)
-        linecnt
+      def self.ident
+        @row.mutation_id
       end
 
       def self.gene_name
@@ -48,20 +54,6 @@ module CosmicRdf
           CosmicRdf::PREFIX[:study],
         ]
       end
-
-      def self.rdf_catalog
-        header = <<'          END'
-          mutation:
-              a dcat:Dataset ;
-              dct:title COSMIC SAMPLE ;
-              rdfs:label cosmic sample ;
-              dcat:keyword "cancer","tumor" ,"mutation" ;
-              dcat:distribution :CosmicSample.tsv.gz ;
-              dcterms:language lang:en ;
-              .
-          END
-      end
-      
     end #- end Class
   end #- end Converter
 end #- end CosmicRdf

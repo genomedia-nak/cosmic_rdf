@@ -58,14 +58,14 @@ module CosmicRdf
           name: :fusion_type,
           fmt:  :s
         },
- #       'PUBMED_PMID' => {
- #         name: :pmid,
- #         fmt:  :i
- #       },
- #       'ID_STUDY' => {
- #         name: :study_id,
- #         fmt:  :i
- #       }
+        'PUBMED_PMID' => {
+          name: :pmid,
+          fmt:  :i
+        },
+        'ID_STUDY' => {
+          name: :study_id,
+          fmt:  :i
+        }
       }.freeze
 
       def each

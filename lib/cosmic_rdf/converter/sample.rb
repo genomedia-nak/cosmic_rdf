@@ -6,23 +6,34 @@ module CosmicRdf
   module Converter
     class Sample < Baseurl
       @ignore = []
-      @add_info = [:age, :gender, :sample_name, :sample_id]
+      @add_info = [:age, :gender, :sample_name, :sample_id, :nci_code]
 
-      def self.identifier(linecnt)
+      @title = "COSMIC SAMPLE"
+      @label = "cosmic sample"
+      @keyword = "cancer, tumor, mutation"
+      @distribution = "CosmicSample.tsv.gz"
+
+      def self.identifier_relation(ident)
+        "sample:#{ident} #{so_type}"
+      end
+
+      def self.ident
         @row.sample_id
       end
 
       def self.sample_id
-        #return "  dcterms:identifier \"#{@row.sample_id}\" ."
-        return  "  #{@predicate}samp_ld [\n" +
-                "    dcat:identifier \"COSS#{@row.sample_id}\";\n" +
-                "    dcat:title \"COSMIC sample ID\"" +
-                "    rdfs:seeAlso <#{CosmicRdf::URIs[:sample]}#{@row.sample_id}>\n" +
-                "  ];"
+        return "  dcat:identifier \"COSS#{@row.sample_id}\" ;"
+        #return sampleid_relation(@row.sample_id)
+        #return  "  #{@predicate}samp_ld [\n" +
+        #        "    dcat:identifier \"COSS#{@row.sample_id}\";\n" +
+        #        "    dcat:title \"COSMIC sample ID\"; \n" +
+        #        "    rdfs:seeAlso <#{CosmicRdf::URIs[:sample]}#{@row.sample_id}>\n" +
+        #        "  ];"
+        
       end
 
       def self.gender
-        disp = "unknown "
+        disp = "unknown"
         disp = "female" if @row.gender == 'f'
         disp = "man" if @row.gender == 'm'
         # return disp
@@ -39,24 +50,23 @@ module CosmicRdf
         return rdf_age
       end
 
+      def self.nci_code
+        return "" +
+              "  #{@predicate}nci_code \"#{@row.nci_code}\" ;\n" +
+              "  rdfs:seeAlso <#{CosmicRdf::URIs[:nci]}#{@row.nci_code}> ;"
+      end
+
+
+
+      def self.alt_puts_rdf(f)
+      end
+
       def self.use_prefix
         prefix =[
+          # CosmicRdf::PREFIX[:sample],
+          CosmicRdf::PREFIX[:nci_type],
         ]
       end
-      
-      def self.rdf_catalog
-        header = <<'EOS'
-s:
-  a dcat:Dataset ;
-  dcat:title "COSMIC SAMPLE" ;
-  rdfs:label "cosmic sample" ;
-  dcat:keyword "cancer","tumor" ,"mutation" ;
-  dcat:distribution "CosmicSample.tsv.gz" ;
-  dcat:language lang:en ;
-  .
-EOS
-      end
-      
     end
   end
 end
