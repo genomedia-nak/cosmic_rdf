@@ -45,7 +45,7 @@ def rdf_create(symbl)
 
   if File.exist?(rdf_file)
     puts "  #{rdf_file} already exists. skip this file."
-#   return
+    return
   end
 
   parser = CosmicRdf::Parser.const_get(classify)
