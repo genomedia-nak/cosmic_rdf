@@ -74,7 +74,7 @@ module CosmicRdf
 
       ## incude sample-ids
       def self.sampleids_relation(sample_ids)
-        sample_ids.sort!
+        #sample_ids.sort!
         sample_ids.uniq!
         rdf_ttl = []
         rdf_ttl << "  #{@predicate}have_sample[ \n"
@@ -212,7 +212,7 @@ module CosmicRdf
         if entrez_id != nil && entrez_id.to_s =~ /^[0-9]+$/
           return  "" +
                   "  cosmic:entrez [\n" +
-                  "    a <http://live.dbpedia.org/ontology/entrezgene> ;\n" +
+                  "    a #{CosmicRdf::RDF_CLASS[:entrez]} ;\n" +
                   "    rdfs:label \"Entrez:#{entrez_id}\" ;\n" +
                   "    dct:references <#{CosmicRdf::URIs[:ncbigene]}#{entrez_id}> ;\n" +
                   "    rdfs:seeAlso <#{CosmicRdf::URIs[:genedirect]}#{entrez_id}> ;\n" +
@@ -311,7 +311,7 @@ module CosmicRdf
           # puts "#{item} #{@row.send(item)}"
           next if @row.send(item).nil? || @row.send(item).to_s.empty?
           items.send(item) << @row.send(item)
-          items.send(item).sort!
+          #items.send(item).sort!
           items.send(item).uniq!
         end
         return items
@@ -323,7 +323,7 @@ module CosmicRdf
           # puts "#{item} #{@row.send(item)}"
           next if @row.send(item).nil? || @row.send(item).to_s.empty?
           items.send(item) << @row.send(item)
-          items.send(item).sort!
+          #items.send(item).sort!
           items.send(item).uniq!
         end
         return items

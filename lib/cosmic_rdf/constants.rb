@@ -81,7 +81,8 @@ module CosmicRdf
     nci:           'https://ncit.nci.nih.gov/ncitbrowser/ConceptReport.jsp?dictionary=NCI%20Thesaurus&code=',
     nci_type:      'http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#',
     cosmic_search: 'http://cancer.sanger.ac.uk/cosmic/search?q=',
-    sio:           'http://semanticscience.org/resource/'
+    sio:           'http://semanticscience.org/resource/',
+
   }.freeze
 
   PREFIX = {
