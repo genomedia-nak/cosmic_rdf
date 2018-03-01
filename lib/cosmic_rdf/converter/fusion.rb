@@ -152,7 +152,7 @@ module CosmicRdf
             pos_list << [$6, $7, $8, $10, is_foward($8, $10), true]
 
         else
-          puts "no position #{pos}"
+          # puts "no position #{pos}"
           return "."
         end
 
