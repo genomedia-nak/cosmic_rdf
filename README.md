@@ -33,4 +33,5 @@ ruby file2rdf.rb -d ［上記のファイルのあるディレクトリ］
   実行が終了するとイメージが削除されます。  
 docker run -v ［上記のファイルのあるディレクトリ］:/opt/ --hostname cosmicrdf -it --rm genomedianak/cosmic_rdf ruby /root/cosmic_rdf/bin/file2rdf.rb  
 
-
+※現在はDockerで全てのファイルを対象に行うと、2日以上かかります。  
+  
