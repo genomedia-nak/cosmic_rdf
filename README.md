@@ -2,8 +2,6 @@
 
 COSMIC RDF Converter
 
-# cosmic
-
 ## Description
 COSMIC(http://cancer.sanger.ac.uk/cosmic)よりダウンロード可能な
 ファイルからRDF形式に変換するスクリプトです。
@@ -25,7 +23,10 @@ COSMIC(http://cancer.sanger.ac.uk/cosmic)よりダウンロード可能な
 ## Usage
 
 ### 直接GitHubから取得した場合
-ruby file2rdf.rb -d ［上記のファイルのあるディレクトリ］ 
+実行環境に必要なgemをインストールします。  
+>(Gemfile ファイルが在るディレクトリ) bundle install  
+  
+ruby file2rdf.rb -d ［上記のファイルのあるディレクトリ］
  -d 以下を省略すると［ /opt/ ］を参照し、ファイルが無ければエラー終了となります。  
   
 ### Docker を利用する場合（暫定）  
